@@ -4,20 +4,20 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import pages.PharmacyParameterizedPage;
+import pages.PharmacyPage;
 
 public class PharmacyParameterizedTests extends TestBase {
 
-    PharmacyParameterizedPage pharmacyParameterizedPage = new PharmacyParameterizedPage();
+    final PharmacyPage pharmacyPage = new PharmacyPage();
 
     @ValueSource(strings = {
             "Траумель", "Анальгин"})
     @ParameterizedTest
     void checkPharmacyMedicine(String searchQuery) {
 
-        pharmacyParameterizedPage.openPage();
-        pharmacyParameterizedPage.searchMedicineInput(searchQuery);
-        pharmacyParameterizedPage.checkMedicineResult(searchQuery);
+        pharmacyPage.openPage();
+        pharmacyPage.searchMedicineInput(searchQuery);
+        pharmacyPage.checkMedicineResult(searchQuery);
     }
 
     @CsvSource(value = {
@@ -27,20 +27,21 @@ public class PharmacyParameterizedTests extends TestBase {
     @ParameterizedTest
     void checkPharmacyStores(String storeName, String expectedStore) {
 
-        pharmacyParameterizedPage.openPage();
-        pharmacyParameterizedPage.clickFavoritePharmacyButton();
-        pharmacyParameterizedPage.clickMapListRadioButton();
-        pharmacyParameterizedPage.searchStoreInput(storeName);
-        pharmacyParameterizedPage.checkListOfStores(expectedStore);
+        pharmacyPage.openPage();
+        pharmacyPage.clickFavoritePharmacyButton();
+        pharmacyPage.clickMapListRadioButton();
+        pharmacyPage.searchStoreInput(storeName);
+        pharmacyPage.checkListOfStores(expectedStore);
     }
+
     @CsvFileSource(resources = "/checkPharmacyMoreThanTwoStores.csv", delimiter = '/')
     @ParameterizedTest
     void checkPharmacyMoreThanTwoStores(String storeName, String expectedStore) {
 
-        pharmacyParameterizedPage.openPage();
-        pharmacyParameterizedPage.clickFavoritePharmacyButton();
-        pharmacyParameterizedPage.clickMapListRadioButton();
-        pharmacyParameterizedPage.searchStoreInput(storeName);
-        pharmacyParameterizedPage.checkListOfStores(expectedStore);
+        pharmacyPage.openPage();
+        pharmacyPage.clickFavoritePharmacyButton();
+        pharmacyPage.clickMapListRadioButton();
+        pharmacyPage.searchStoreInput(storeName);
+        pharmacyPage.checkListOfStores(expectedStore);
     }
 }
